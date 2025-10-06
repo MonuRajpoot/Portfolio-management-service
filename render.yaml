@@ -19,11 +19,10 @@ services:
       - key: FLASK_DEBUG
         value: false
       - key: OPENAI_API_KEY
-        value:   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
+        value: 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
 
-  - type: pserv
-    name: wealthwave-db
-    env: postgresql
-    plan: starter
+databases:
+  - name: wealthwave-db
     databaseName: wealthwave
-    databaseUser: wealthwave_user
+    user: wealthwave_user
+    plan: starter
