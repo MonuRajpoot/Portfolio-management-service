@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: wealthwave-pms
+    env: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --config gunicorn.conf.py wsgi:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: wealthwave-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_DEBUG
+        value: false
+      - key: OPENAI_API_KEY
+        value:  false
+  - type: pserv
+    name: wealthwave-db
+    env: postgresql
+    plan: starter
+    databaseName: wealthwave
+    databaseUser: wealthwave_user
