@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: wealthwave-pms
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --config gunicorn.conf.py wsgi:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_DEBUG
+        value: false
+      - key: OPENAI_API_KEY
+        value: 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
